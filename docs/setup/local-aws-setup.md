@@ -9,7 +9,12 @@ This document explains how to set up a local AWS development environment using L
 ### 1.1 Prerequisites
 ```shell
 # Install Python and pip
-brew install python
+brew install pyenv
+pyenv install 3.14.4
+pyenv global 3.14.4
+pip install virtualenv
+
+# brew install python
 ```
 
 ### 1.2 Virtual Environment Setup
@@ -104,13 +109,33 @@ docker run -d \
 pip install moto
 ```
 
+### 1.9 Account Setup
+
+#### LocalStack's authentication model
+
+The localstack/localstack:latest Docker image now requires a `LOCALSTACK_AUTH_TOKEN` for startup, even for community (free) usage.
+
+Use a Free Auth Token (Recommended):
+
+1. Create a free account at https://app.localstack.cloud
+2. Generate an Auth Token:
+  a. Go to Settings → Auth Tokens
+  b. Create and copy your token
+  c. Set the token in your environment:
+
+in `~/.env.local`
+
+```shell
+export LOCALSTACK_AUTH_TOKEN=`LOCALSTACK_AUTH_TOKEN`
+```
+
+
 ## 2. Configuration
 
 ### 2.1 Docker Compose Setup
 Create `docker-compose.yml`:
 
 ```yaml
-version: '3.8'
 services:
   localstack:
     image: localstack/localstack:latest
@@ -120,6 +145,7 @@ services:
     environment:
       - DEBUG=1
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
