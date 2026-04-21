@@ -6,6 +6,11 @@
       "sourceType": "github",
       "computedHash": "f29c9486cede6c7b2df0cfb0a2e4aa67446552b991bcf17d1b309e903171f03d"
     },
+    "docker-expert": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "7a0cf3e3a5f8d18ddb452c784ac965aa40b1bfa2a736c5689d252328f18017d1"
+    },
     "documentation-writer": {
       "source": "github/awesome-copilot",
       "sourceType": "github",
@@ -30,6 +35,11 @@
       "source": "github/awesome-copilot",
       "sourceType": "github",
       "computedHash": "2607fc60629b82b257136dd2a7a373f0a4466c0b49df7746d845d59313c99b21"
+    },
+    "localstack": {
+      "source": "localstack/skills",
+      "sourceType": "github",
+      "computedHash": "ac9e6fd8aa895191fb75e2df4d3d435c8b66d79a7e273b37fbbc46e1d1b4f853"
     },
     "prompt-builder": {
       "source": "github/awesome-copilot",
