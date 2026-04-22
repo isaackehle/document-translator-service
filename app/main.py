@@ -1,8 +1,10 @@
 # FastAPI Application
 from contextlib import asynccontextmanager
+from datetime import UTC, datetime
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 
 from app.api.v1.router import api_router
 from app.core.config import settings
@@ -42,7 +44,27 @@ app.add_middleware(
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 
-@app.get("/health")
+class HealthStatus(BaseModel):
+    """Health status response model."""
+
+    alive: bool
+    services: dict[str, str] = Field(default_factory=dict)
+    version: str = "1.0.0"
+    timestamp: str = Field(default_factory=lambda: datetime.now(UTC).isoformat())
+
+
+@app.get("/health", response_model=HealthStatus)
 async def health_check():
-    """Health check endpoint."""
-    return {"status": "healthy"}
+    """Health check endpoint.
+
+    Returns a minimal response by default. As features are added,
+    this can be extended to include service health checks.
+    """
+    status = HealthStatus(
+        alive=True,
+        services={
+            "database": "unknown",  # Will be updated when DB checks are added
+            "s3": "unknown",  # Will be updated when S3 checks are added
+        },
+    )
+    return status.model_dump(exclude_none=True)
