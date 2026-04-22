@@ -2,6 +2,9 @@
 name = "ai-document-translator"
 version = "0.2.0"
 
+[tool.setuptools]
+packages = ["app"]
+
 [tool.commitizen]
 name = "cz_conventional_commits"
 version_provider = "pep621"
@@ -16,14 +19,14 @@ line-length = 100
 convention = "google"
 
 [tool.ruff.lint]
-ignore=    ["E501"]  # Line too long (handled by formatter)
+ignore = ["E501"] # Line too long (handled by formatter)
 select = [
-    "E",   # pycodestyle errors
-    "F",   # Pyflakes
-    "I",   # isort (import sorting)
-    "N",   # pep8-naming
-    "W",   # pycodestyle warnings
-    "UP",  # pyupgrade
+    "E",  # pycodestyle errors
+    "F",  # Pyflakes
+    "I",  # isort (import sorting)
+    "N",  # pep8-naming
+    "W",  # pycodestyle warnings
+    "UP", # pyupgrade
 ]
 
 [tool.ruff.lint.isort]
@@ -31,10 +34,16 @@ known-third-party = ["alembic", "fastapi", "pydantic", "sqlalchemy"]
 known-first-party = ["app"]
 
 
-
 [tool.pyright]
 include = ["app"]
-exclude = ["**/__pycache__", ".venv", "venv", "alembic"]
+exclude = [
+    "**/__pycache__",
+    ".venv",
+    "venv",
+    "alembic",
+    "**/node_modules",
+    "**/.*",
+]
 reportMissingImports = "warning"
 reportMissingTypeStubs = false
 reportGeneralTypeIssues = "warning"
