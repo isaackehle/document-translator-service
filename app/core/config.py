@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     # CORS
     ALLOWED_HOSTS: list[str] = ["*"]
 
+    SOURCE_BUCKET: str = "source-documents"
+    TRANSLATED_BUCKET: str = "translated-documents"
+
     class Config:
         env_file = ".env"
         case_sensitive = True

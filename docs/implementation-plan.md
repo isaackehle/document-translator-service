@@ -44,10 +44,10 @@ This plan covers the complete implementation of a bilingual (English ↔ Hebrew)
 
 ### S3 Integration
 - ✅ Create S3 client with LocalStack/minio configuration
-- ⬜ Design bucket structure (source documents, translated documents)
+- ✅ Design bucket structure (source documents, translated documents)
 - ⬜ Implement document upload operations
 - ⬜ Implement document download/retrieval operations
-- ⬜ Add error handling for S3 service failures
+- ✅ Add error handling for S3 service failures
 
 ### SQS Queue Implementation
 - ⬜ Create SQS queue with proper naming conventions

@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from app.api.v1.router import api_router
+from app.core.buckets import create_buckets
 from app.core.config import settings
 from app.core.database import database
 
@@ -42,6 +43,8 @@ app.add_middleware(
 
 # Include API router
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+create_buckets()
 
 
 class HealthStatus(BaseModel):

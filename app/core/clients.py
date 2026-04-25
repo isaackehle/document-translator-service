@@ -6,7 +6,6 @@ S3_CONFIG = {
     "aws_access_key_id": "minioadmin",
     "aws_secret_access_key": "minioadmin",
     "config": Config(signature_version="s3v4", s3={"addressing_style": "path"}),
-    "region_name": "us-east-1",
 }
 
 # Create a single, reusable S3 client instance
