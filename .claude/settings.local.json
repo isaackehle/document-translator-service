@@ -4,7 +4,9 @@
       "Bash(docker compose *)",
       "Bash(./scripts/start-localstack.sh start *)",
       "Bash(chmod +x /Users/isaac/code/isaackehle/ai-document-translator/scripts/start-localstack.sh)",
-      "Bash(/Users/isaac/code/isaackehle/ai-document-translator/scripts/start-localstack.sh start *)"
+      "Bash(/Users/isaac/code/isaackehle/ai-document-translator/scripts/start-localstack.sh start *)",
+      "Bash(/Users/isaac/code/isaackehle/ai-document-translator/.venv/bin/python -m pip install \"boto3-stubs[s3]\")",
+      "Bash(uv pip *)"
     ]
   }
 }

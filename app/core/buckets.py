@@ -9,5 +9,5 @@ def create_buckets() -> None:
         try:
             s3_client.create_bucket(Bucket=bucket)
         except ClientError as e:
-            if e.response["Error"]["Code"] != "BucketAlreadyOwnedByYou":
+            if e.response.get("Error", {}).get("Code") != "BucketAlreadyOwnedByYou":
                 raise

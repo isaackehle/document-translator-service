@@ -1,5 +1,6 @@
 import boto3
 from botocore.config import Config
+from mypy_boto3_s3 import S3Client
 
 S3_CONFIG = {
     "endpoint_url": "http://localhost:9000",
@@ -8,10 +9,8 @@ S3_CONFIG = {
     "config": Config(signature_version="s3v4", s3={"addressing_style": "path"}),
 }
 
-# Create a single, reusable S3 client instance
-s3_client = boto3.client("s3", **S3_CONFIG)
+s3_client: S3Client = boto3.client("s3", **S3_CONFIG)
 
 
-# You can also create a function to get the client if needed
-def get_s3_client():
+def get_s3_client() -> S3Client:
     return boto3.client("s3", **S3_CONFIG)
