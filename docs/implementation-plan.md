@@ -43,7 +43,7 @@ This plan covers the complete implementation of a bilingual (English ↔ Hebrew)
 **Goal**: Implement S3 storage and SQS queue services
 
 ### S3 Integration
-- ⬜ Create S3 client with LocalStack/minio configuration
+- ✅ Create S3 client with LocalStack/minio configuration
 - ⬜ Design bucket structure (source documents, translated documents)
 - ⬜ Implement document upload operations
 - ⬜ Implement document download/retrieval operations
@@ -393,7 +393,7 @@ docker-compose up -d localstack minio
 pytest tests/ --aws-mock --verbose
 
 # Verify local setup
-curl http://localhost:4566/health
+curl http://localhost:4566/_localstack/health
 ```
 
 ### Production Deployment
