@@ -59,8 +59,9 @@ start_localstack() {
     
     if check_localstack_health; then
         log_info "LocalStack is ready!"
-        log_info "Console: http://localhost:4566"
-        log_info "LocalStack CLI: awslocal --endpoint-url=http://localhost:4566"
+        log_info "API: http://localhost:4567"
+        log_info "Health: http://localhost:4567/_localstack/health"
+        log_info "LocalStack CLI: awslocal --endpoint-url=http://localhost:4567"
     else
         log_error "LocalStack failed to start"
         exit 1
@@ -80,7 +81,7 @@ check_localstack_health() {
     local attempt=1
     
     while [[ $attempt -le $max_attempts ]]; do
-        if curl -s -f "http://localhost:4566/_aws/health" > /dev/null 2>&1; then
+        if curl -s -f "http://localhost:4567/_localstack/health" > /dev/null 2>&1; then
             return 0
         fi
         log_info "Waiting for LocalStack... (attempt $attempt/$max_attempts)"
@@ -93,12 +94,11 @@ check_localstack_health() {
 
 # Show LocalStack status
 show_status() {
-    if docker-compose ps localstack | grep -q "Up"; then
+    if check_localstack_health; then
         log_info "LocalStack is running"
         log_info "Endpoints:"
-        log_info "  - API: http://localhost:4566"
-        log_info "  - Console: http://localhost:4571"
-        log_info "  - Health: http://localhost:4566/_aws/health"
+        log_info "  - API: http://localhost:4567"
+        log_info "  - Health: http://localhost:4567/_localstack/health"
     else
         log_warn "LocalStack is not running"
     fi

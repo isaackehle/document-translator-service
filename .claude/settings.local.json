@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker compose *)",
+      "Bash(./scripts/start-localstack.sh start *)",
+      "Bash(chmod +x /Users/isaac/code/isaackehle/ai-document-translator/scripts/start-localstack.sh)",
+      "Bash(/Users/isaac/code/isaackehle/ai-document-translator/scripts/start-localstack.sh start *)"
+    ]
+  }
+}
