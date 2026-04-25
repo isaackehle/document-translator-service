@@ -52,16 +52,16 @@ validate_env() {
 start_localstack() {
     log_info "Starting LocalStack..."
     
-    docker-compose up -d localstack
+    docker-compose up -d
     
     log_info "Waiting for LocalStack to be ready..."
     sleep 5
     
     if check_localstack_health; then
         log_info "LocalStack is ready!"
-        log_info "API: http://localhost:4567"
-        log_info "Health: http://localhost:4567/_localstack/health"
-        log_info "LocalStack CLI: awslocal --endpoint-url=http://localhost:4567"
+        log_info "API: http://localhost:4566"
+        log_info "Health: http://localhost:4566/_localstack/health"
+        log_info "LocalStack CLI: awslocal --endpoint-url=http://localhost:4566"
     else
         log_error "LocalStack failed to start"
         exit 1
@@ -71,7 +71,7 @@ start_localstack() {
 # Stop LocalStack
 stop_localstack() {
     log_info "Stopping LocalStack..."
-    docker-compose down localstack
+    docker-compose down
     log_info "LocalStack stopped"
 }
 
@@ -81,7 +81,7 @@ check_localstack_health() {
     local attempt=1
     
     while [[ $attempt -le $max_attempts ]]; do
-        if curl -s -f "http://localhost:4567/_localstack/health" > /dev/null 2>&1; then
+        if curl -s -f "http://localhost:4566/_localstack/health" > /dev/null 2>&1; then
             return 0
         fi
         log_info "Waiting for LocalStack... (attempt $attempt/$max_attempts)"
@@ -97,8 +97,8 @@ show_status() {
     if check_localstack_health; then
         log_info "LocalStack is running"
         log_info "Endpoints:"
-        log_info "  - API: http://localhost:4567"
-        log_info "  - Health: http://localhost:4567/_localstack/health"
+        log_info "  - API: http://localhost:4566"
+        log_info "  - Health: http://localhost:4566/_localstack/health"
     else
         log_warn "LocalStack is not running"
     fi
@@ -112,22 +112,22 @@ main() {
     case "${1:-start}" in
         start)
             start_localstack
-            ;;
+        ;;
         stop)
             stop_localstack
-            ;;
+        ;;
         status)
             show_status
-            ;;
+        ;;
         restart)
             stop_localstack
             start_localstack
-            ;;
+        ;;
         *)
             log_error "Unknown command: $1"
             log_info "Usage: $0 [start|stop|status|restart]"
             exit 1
-            ;;
+        ;;
     esac
 }
 

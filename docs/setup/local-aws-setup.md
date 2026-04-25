@@ -226,13 +226,13 @@ When starting the containers, use a project name to group them:
 
 ```shell
 # Start all services with a specific project name
-docker-compose -p local-aws-project up -d
+docker-compose -p ai-document-translator up -d
 
 # Stop all services in the project
-docker-compose -p local-aws-project down
+docker-compose -p ai-document-translator down
 
 # View containers in the project
-docker-compose -p local-aws-project ps
+docker-compose -p ai-document-translator ps
 ```
 
 ### 4.2 Creating a Custom Docker Compose File with Labels
@@ -303,10 +303,10 @@ To create new images that belong to the same group as your existing containers:
 
 ```shell
 # Build a new image with a specific tag
-docker build -t local-aws-project/my-service:latest .
+docker build -t ai-document-translator/my-service:latest .
 
 # Or build with a specific project name
-docker build -t local-aws-project/my-service:v1.0 .
+docker build -t ai-document-translator/my-service:v1.0 .
 ```
 
 2. Run the new image within the same project:
@@ -314,8 +314,8 @@ docker build -t local-aws-project/my-service:v1.0 .
 ```shell
 # Run the new container with the project name
 docker run -d --name my-service \
-  --network local-aws-project_default \
-  local-aws-project/my-service:latest
+  --network ai-document-translator_default \
+  ai-document-translator/my-service:latest
 ```
 
 ### 5.2 Managing Images in Rancher Desktop
@@ -334,10 +334,10 @@ In Rancher Desktop, you can manage images through:
    docker images
 
    # Filter images by project
-   docker images --filter "reference=local-aws-project/*"
+   docker images --filter "reference=ai-document-translator/*"
 
    # Remove specific images
-   docker rmi local-aws-project/my-service:latest
+   docker rmi ai-document-translator/my-service:latest
    ```
 
 ### 5.3 Best Practices for Image Grouping
@@ -345,14 +345,14 @@ In Rancher Desktop, you can manage images through:
 1. **Use consistent naming conventions:**
    ```shell
    # Use project prefix for all images
-   local-aws-project/service-name:tag
+   ai-document-translator/service-name:tag
    ```
 
 2. **Tag images appropriately:**
    ```shell
    # Use semantic versioning or timestamps
-   local-aws-project/api-service:v1.2.0
-   local-aws-project/api-service:2023-10-15
+   ai-document-translator/api-service:v1.2.0
+   ai-document-translator/api-service:2023-10-15
    ```
 
 3. **Clean up unused images:**
