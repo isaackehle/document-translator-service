@@ -88,7 +88,7 @@ To test S3 uploads without hitting AWS, we use LocalStack (a local AWS emulator)
 version: '3.8'
 services:
   localstack:
-    container_name: ai-doc-translator-localstack
+    container_name: doc-translator-svc-localstack
     image: localstack/localstack:latest
     ports:
       - '4566:4566' # LocalStack gateway
@@ -107,7 +107,7 @@ services:
 
 ```shell
 #!/bin/bash
-aws --endpoint-url=http://localhost:4566 s3 mb s3://ai-doc-translator
+aws --endpoint-url=http://localhost:4566 s3 mb s3://doc-translator-svc
 ```
 
 > Make it executable: `chmod +x .localstack/init-scripts/01-create-bucket.sh`
@@ -122,7 +122,7 @@ docker-compose up -d
 
 ```shell
 aws --endpoint-url=http://localhost:4566 s3 ls
-# Should show: ai-doc-translator
+# Should show: doc-translator-svc
 ```
 
 ### Option B: Use localstack CLI (if installed)
