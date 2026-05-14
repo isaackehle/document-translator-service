@@ -6,6 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "ai-document-translator"
 version = "0.2.0"
 requires-python = ">=3.11"
+description = "Translate documents using AI"
+readme = "README.md"
 dependencies = [
     "alembic>=1.13.0",
     "asyncpg>=0.29.0",
@@ -16,12 +18,20 @@ dependencies = [
     "passlib[bcrypt]>=1.7.4",
     "pydantic>=2.5.0",
     "pydantic-settings>=2.1.0",
-    "pytest>=7.4.0",
-    "pytest-asyncio>=0.23.0",
     "python-jose[cryptography]>=3.3.0",
     "python-multipart>=0.0.6",
     "sqlalchemy[asyncio]>=2.0.25",
     "uvicorn[standard]>=0.27.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.6.0",
+    "pyright>=1.1.380",
+    "pre-commit>=3.7.0",
 ]
 
 [tool.setuptools]
@@ -34,7 +44,7 @@ tag_format = "v$version"
 update_changelog_on_bump = true
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py311"
 line-length = 100
 
 [tool.ruff.lint.pydocstyle]
@@ -54,7 +64,6 @@ select = [
 [tool.ruff.lint.isort]
 known-third-party = ["alembic", "fastapi", "pydantic", "sqlalchemy"]
 known-first-party = ["app"]
-
 
 [tool.pyright]
 include = ["app"]
@@ -77,8 +86,6 @@ exclude = [
     "alembic",
     "venv",
 ]
-
-
 reportMissingImports = "warning"
 reportMissingTypeStubs = false
 reportGeneralTypeIssues = "warning"
@@ -89,24 +96,19 @@ reportUnboundVariable = "warning"
 reportAttributeAccessIssue = "warning"
 reportIncompatibleMethodOverride = "warning"
 reportUnusedParameter = "none"
-pythonVersion = "3.14"
+pythonVersion = "3.13"
 typeCheckingMode = "basic"
 useLibraryCodeForTypes = true
 
-
 [tool.pytest.ini_options]
-asyncio_mode = "auto"
+asyncio-mode = "auto"
 testpaths = ["tests"]
-
 addopts = "-ra -q"
-
 python_files = "test_*.py"
 python_functions = "test_*"
 
-
 [tool.coverage.run]
 omit = ["tests/*", "alembic/*", "venv/*"]
-
 
 [tool.coverage.report]
 exclude_lines = [
