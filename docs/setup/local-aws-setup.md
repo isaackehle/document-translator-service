@@ -173,14 +173,14 @@ Create `~/.aws/credentials`:
 [local]
 aws_access_key_id = test
 aws_secret_access_key = test
-region = us-east-1
+region = us-east-2
 ```
 
 Create `~/.aws/config`:
 
 ```ini
 [profile local]
-region = us-east-1
+region = us-east-2
 output = json
 ```
 
@@ -210,7 +210,7 @@ from moto import mock_s3
 
 # Test with moto
 with mock_s3():
-    s3 = boto3.client('s3', region_name='us-east-1')
+    s3 = boto3.client('s3', region_name='us-east-2')
     s3.create_bucket(Bucket='test-bucket')
     print('S3 mock test passed')
 "

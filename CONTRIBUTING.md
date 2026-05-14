@@ -94,7 +94,7 @@ services:
       - '4566:4566' # LocalStack gateway
       - '4510-4559:4510-4559' # external services port range
     environment:
-      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_DEFAULT_REGION=us-east-2
       - DEBUG=1
       - DOCKER_ENDPOINT=unix:///var/run/docker.sock
     volumes:
@@ -152,7 +152,7 @@ def get_s3_client():
         endpoint_url=os.getenv("AWS_ENDPOINT_URL", "http://localhost:4566"),
         aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID", "test"),
         aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY", "test"),
-        region_name=os.getenv("AWS_DEFAULT_REGION", "us-east-1"),
+        region_name=os.getenv("AWS_DEFAULT_REGION", "us-east-2"),
         config=Config(signature_version="s3v4"),
     )
 ```
