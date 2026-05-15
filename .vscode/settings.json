@@ -113,5 +113,6 @@
     "**/build": true,
     "**/*.pyc": true,
     "**/*.gz": true
-  }
+  },
+  "makefile.configureOnOpen": false
 }

@@ -45,13 +45,17 @@ update_changelog_on_bump = true
 
 [tool.ruff]
 target-version = "py311"
-line-length = 100
+line-length = 120
+exclude = [".git", "__pycache__", "dist", "build"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.ruff.lint]
-ignore = ["E501"] # Line too long (handled by formatter)
+ignore = [
+    "E501", # Line too long (handled by formatter)
+    "E402", # Module level import not at top of file
+]
 select = [
     "E",  # pycodestyle errors
     "F",  # Pyflakes
@@ -64,6 +68,11 @@ select = [
 [tool.ruff.lint.isort]
 known-third-party = ["alembic", "fastapi", "pydantic", "sqlalchemy"]
 known-first-party = ["app"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
 
 [tool.pyright]
 include = ["app"]
@@ -101,7 +110,7 @@ typeCheckingMode = "basic"
 useLibraryCodeForTypes = true
 
 [tool.pytest.ini_options]
-asyncio-mode = "auto"
+asyncio_mode = "auto"
 testpaths = ["tests"]
 addopts = "-ra -q"
 python_files = "test_*.py"
