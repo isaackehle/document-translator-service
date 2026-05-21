@@ -16,9 +16,7 @@ router = APIRouter()
 
 
 @router.post("/login", summary="Login and get access token", response_model=dict)
-async def login(
-    db: AsyncSession = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
-) -> dict:
+async def login(db: AsyncSession = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()) -> dict:
     """
     OAuth2 compatible token login.
 
@@ -33,9 +31,7 @@ async def login(
         HTTPException: 400 if authentication fails
     """
     # Try to authenticate user
-    user = await user_service.authenticate(
-        db, email=form_data.username, password=form_data.password
-    )
+    user = await user_service.authenticate(db, email=form_data.username, password=form_data.password)
 
     if not user:
         raise HTTPException(

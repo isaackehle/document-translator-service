@@ -22,4 +22,3 @@ uv export --format requirements-txt > requirements.txt
 ```
 
 This exports a pip-compatible requirements.txt from uv.lock, ensuring exact pinned versions are reflected. Use this when required for deployment (e.g., Docker, CI/CD), but do not manually edit or maintain requirements.txt—always regenerate it from the lockfile to stay in sync.
-
