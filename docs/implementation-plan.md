@@ -14,7 +14,7 @@ This plan covers the complete implementation of a bilingual (English ↔ Hebrew)
 - ✅ Establish architecture overview
 - ✅ Document implementation phases
 
-**Status**: ✅ Complete
+**Status**: ⬜ In Progress
 
 ---
 
@@ -379,6 +379,8 @@ This plan covers the complete implementation of a bilingual (English ↔ Hebrew)
 - [ ] CloudWatch logging captures events in local and AWS
 - [ ] End-to-end translation pipeline works end-to-end
 - [ ] Production deployment completes without errors
+- [ ] Translation endpoint works with Ollama integration
+- [ ] Frontend displays translated segments with RTL support
 
 ---
 
@@ -444,14 +446,14 @@ curl https://api.example.com/translate \
 | 1     | Project Foundation    | ✅ Complete    | 100%       |
 | 2     | Local Dev Environment | ✅ Complete    | 100%       |
 | 3-6   | AWS Infrastructure    | 🟡 In Progress | ~40%       |
-| 7-8   | Core Backend/Frontend | ✅ Complete    | 100%       |
+| 7-8   | Core Backend/Frontend | ⬜ In Progress | ~20%       |
 | 9     | Token Processing      | 🔴 Not Started | 0%         |
 | 10    | Enhanced Review UI    | 🔴 Not Started | 0%         |
 | 11    | Token Highlighting    | 🔴 Not Started | 0%         |
 | 12    | Complete Workflow     | 🔴 Not Started | 0%         |
 | 13    | AWS Migration         | 🔴 Not Started | 0%         |
 
-**Overall Progress**: ~45% complete (Phases 1-8 partially done)
+**Overall Progress**: ~15% complete (Phases 1‑2 done)
 
 ---
 
