@@ -25,4 +25,3 @@ All documentation should follow the standard format:
 3. Standard sections: Installation, Configuration, Usage, References
 
 ## Example Structure
-

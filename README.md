@@ -1,6 +1,6 @@
-# ai-document-translator
+# document-translator-service
 
-AI Document translator; AI Pipeline demo
+Document translator service; AI Pipeline demo
 
 ## 📚 Documentation
 

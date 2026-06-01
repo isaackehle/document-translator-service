@@ -51,12 +51,12 @@ validate_env() {
 # Start LocalStack
 start_localstack() {
     log_info "Starting LocalStack..."
-    
+
     docker-compose up -d
-    
+
     log_info "Waiting for LocalStack to be ready..."
     sleep 5
-    
+
     if check_localstack_health; then
         log_info "LocalStack is ready!"
         log_info "API: http://localhost:4566"
@@ -79,7 +79,7 @@ stop_localstack() {
 check_localstack_health() {
     local max_attempts=30
     local attempt=1
-    
+
     while [[ $attempt -le $max_attempts ]]; do
         if curl -s -f "http://localhost:4566/_localstack/health" > /dev/null 2>&1; then
             return 0
@@ -88,7 +88,7 @@ check_localstack_health() {
         sleep 2
         ((attempt++))
     done
-    
+
     return 1
 }
 
@@ -108,7 +108,7 @@ show_status() {
 main() {
     load_env
     validate_env
-    
+
     case "${1:-start}" in
         start)
             start_localstack

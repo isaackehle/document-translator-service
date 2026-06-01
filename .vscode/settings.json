@@ -43,11 +43,7 @@
     "strings": true
   },
   "python.analysis.autoImportCompletions": true,
-  "python.analysis.diagnosticMode": "workspace",
-  "python.autoComplete.extraPaths": [
-    ".",
-    "./app"
-  ],
+  "python.autoComplete.extraPaths": [".", "./app"],
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
@@ -79,5 +75,44 @@
       "endpoint": "http://localhost:11434/v1",
       "model": "qwen3.2-coder:7b"
     }
-  }
+  },
+
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.indexing": false,
+  "python.analysis.autoSearchPaths": false,
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.venv/**": true,
+    "**/venv/**": true,
+    "**/env/**": true,
+    "**/__pycache__/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/.tox/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/*.pyc": true,
+    "**/*.gz": true
+  },
+
+  "search.exclude": {
+    "**/.venv": true,
+    "**/venv": true,
+    "**/env": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/.tox": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/*.pyc": true,
+    "**/*.gz": true
+  },
+  "makefile.configureOnOpen": false
 }

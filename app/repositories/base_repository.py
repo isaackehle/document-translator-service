@@ -74,9 +74,7 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         await db.refresh(db_obj)
         return db_obj
 
-    async def update(
-        self, db: AsyncSession, db_obj: ModelType, obj_in: UpdateSchemaType
-    ) -> ModelType:
+    async def update(self, db: AsyncSession, db_obj: ModelType, obj_in: UpdateSchemaType) -> ModelType:
         """
         Update record.
 

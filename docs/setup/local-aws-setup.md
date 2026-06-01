@@ -7,6 +7,7 @@ This document explains how to set up a local AWS development environment using L
 ## 1. Installation
 
 ### 1.1 Prerequisites
+
 ```shell
 # Install Python and pip
 brew install pyenv
@@ -22,12 +23,14 @@ pip install virtualenv
 #### 1.2.1 Rancher Desktop
 
 1. Rancher Desktop Setup
+
 ```shell
 # Install Rancher Desktop
 brew install --cask rancher
 ```
 
 2. Verify Rancher Desktop Installation
+
 ```shell
 # Verify rdctl CLI is available
 which rdctl
@@ -37,6 +40,7 @@ rdctl version
 ```
 
 3. Start Rancher Desktop
+
 ```shell
 rdctl start --application.start-in-background
 
@@ -44,9 +48,11 @@ rdctl start --application.start-in-background
 rdctl start --help
 rdctl start  --containers.show-all
 ```
+
 #### 1.2.2 Docker Desktop
 
 1. Docker Desktop Setup
+
 ```shell
 # Install Docker Desktop
 brew install --cask docker
@@ -78,6 +84,7 @@ docker ps
 ```
 
 ### 1.3 LocalStack Setup
+
 ```shell
 # Install LocalStack CLI (optional but recommended)
 pip install localstack
@@ -92,6 +99,7 @@ docker run -d \
 ```
 
 ### 1.4 MinIO Setup
+
 ```shell
 # Run minio
 docker run -d \
@@ -104,6 +112,7 @@ docker run -d \
 ```
 
 ### 1.5 Moto Setup
+
 ```shell
 # Install moto in your Python environment
 pip install moto
@@ -119,9 +128,9 @@ Use a Free Auth Token (Recommended):
 
 1. Create a free account at https://app.localstack.cloud
 2. Generate an Auth Token:
-  a. Go to Settings → Auth Tokens
-  b. Create and copy your token
-  c. Set the token in your environment:
+   a. Go to Settings → Auth Tokens
+   b. Create and copy your token
+   c. Set the token in your environment:
 
 in `~/.env.local`
 
@@ -129,10 +138,10 @@ in `~/.env.local`
 export LOCALSTACK_AUTH_TOKEN=`LOCALSTACK_AUTH_TOKEN`
 ```
 
-
 ## 2. Configuration
 
 ### 2.1 Docker Compose Setup
+
 Create `docker-compose.yml`:
 
 ```yaml
@@ -140,53 +149,55 @@ services:
   localstack:
     image: localstack/localstack:latest
     ports:
-      - "4566:4566"
-      - "4571:4571"
+      - '4566:4566'
+      - '4571:4571'
     environment:
       - DEBUG=1
       - DOCKER_HOST=unix:///var/run/docker.sock
       - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
     volumes:
-      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
 
   minio:
     image: minio/minio:latest
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - '9000:9000'
+      - '9001:9001'
     environment:
-      - "MINIO_ROOT_USER=minioadmin"
-      - "MINIO_ROOT_PASSWORD=minioadmin"
+      - 'MINIO_ROOT_USER=minioadmin'
+      - 'MINIO_ROOT_PASSWORD=minioadmin'
     command: server /data --console-address ":9001"
     volumes:
-      - "minio_data:/data"
+      - 'minio_data:/data'
 
 volumes:
   minio_data:
 ```
 
 ### 2.2 AWS Configuration
+
 Create `~/.aws/credentials`:
 
 ```ini
 [local]
 aws_access_key_id = test
 aws_secret_access_key = test
-region = us-east-1
+region = us-east-2
 ```
 
 Create `~/.aws/config`:
 
 ```ini
 [profile local]
-region = us-east-1
+region = us-east-2
 output = json
 ```
 
 ## 3. Start / Usage
 
 ### 3.1 Starting the Services
+
 ```shell
 # Start all services with Docker Compose
 docker-compose up -d
@@ -196,6 +207,7 @@ docker-compose ps
 ```
 
 ### 3.2 Testing the Setup
+
 ```shell
 # Test LocalStack health
 curl http://localhost:4566/health
@@ -210,7 +222,7 @@ from moto import mock_s3
 
 # Test with moto
 with mock_s3():
-    s3 = boto3.client('s3', region_name='us-east-1')
+    s3 = boto3.client('s3', region_name='us-east-2')
     s3.create_bucket(Bucket='test-bucket')
     print('S3 mock test passed')
 "
@@ -226,13 +238,13 @@ When starting the containers, use a project name to group them:
 
 ```shell
 # Start all services with a specific project name
-docker-compose -p ai-document-translator up -d
+docker-compose -p document-translator-service up -d
 
 # Stop all services in the project
-docker-compose -p ai-document-translator down
+docker-compose -p document-translator-service down
 
 # View containers in the project
-docker-compose -p ai-document-translator ps
+docker-compose -p document-translator-service ps
 ```
 
 ### 4.2 Creating a Custom Docker Compose File with Labels
@@ -245,32 +257,32 @@ services:
   localstack:
     image: localstack/localstack:latest
     ports:
-      - "4566:4566"
-      - "4571:4571"
+      - '4566:4566'
+      - '4571:4571'
     environment:
       - DEBUG=1
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
     labels:
-      - "project=local-aws-setup"
-      - "service=localstack"
+      - 'project=local-aws-setup'
+      - 'service=localstack'
 
   minio:
     image: minio/minio:latest
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - '9000:9000'
+      - '9001:9001'
     environment:
-      - "MINIO_ROOT_USER=minioadmin"
-      - "MINIO_ROOT_PASSWORD=minioadmin"
+      - 'MINIO_ROOT_USER=minioadmin'
+      - 'MINIO_ROOT_PASSWORD=minioadmin'
     command: server /data --console-address ":9001"
     volumes:
-      - "minio_data:/data"
+      - 'minio_data:/data'
     labels:
-      - "project=local-aws-setup"
-      - "service=minio"
+      - 'project=local-aws-setup'
+      - 'service=minio'
 
 volumes:
   minio_data:
@@ -303,10 +315,10 @@ To create new images that belong to the same group as your existing containers:
 
 ```shell
 # Build a new image with a specific tag
-docker build -t ai-document-translator/my-service:latest .
+docker build -t document-translator-service/my-service:latest .
 
 # Or build with a specific project name
-docker build -t ai-document-translator/my-service:v1.0 .
+docker build -t document-translator-service/my-service:v1.0 .
 ```
 
 2. Run the new image within the same project:
@@ -315,7 +327,7 @@ docker build -t ai-document-translator/my-service:v1.0 .
 # Run the new container with the project name
 docker run -d --name my-service \
   --network ai-document-translator_default \
-  ai-document-translator/my-service:latest
+  document-translator-service/my-service:latest
 ```
 
 ### 5.2 Managing Images in Rancher Desktop
@@ -329,33 +341,37 @@ In Rancher Desktop, you can manage images through:
    - Delete or manage images as needed
 
 2. **Using CLI commands:**
+
    ```shell
    # List all images
    docker images
 
    # Filter images by project
-   docker images --filter "reference=ai-document-translator/*"
+   docker images --filter "reference=document-translator-service/*"
 
    # Remove specific images
-   docker rmi ai-document-translator/my-service:latest
+   docker rmi document-translator-service/my-service:latest
    ```
 
 ### 5.3 Best Practices for Image Grouping
 
 1. **Use consistent naming conventions:**
+
    ```shell
    # Use project prefix for all images
-   ai-document-translator/service-name:tag
+   document-translator-service/service-name:tag
    ```
 
 2. **Tag images appropriately:**
+
    ```shell
    # Use semantic versioning or timestamps
-   ai-document-translator/api-service:v1.2.0
-   ai-document-translator/api-service:2023-10-15
+   document-translator-service/api-service:v1.2.0
+   document-translator-service/api-service:2023-10-15
    ```
 
 3. **Clean up unused images:**
+
    ```shell
    # Remove dangling images
    docker image prune
@@ -367,6 +383,7 @@ In Rancher Desktop, you can manage images through:
 ## 6. Verification
 
 ### 6.1 Verify Docker Installation
+
 ```shell
 # Check Docker version
 docker --version
@@ -375,8 +392,8 @@ docker --version
 docker info
 ```
 
-
 ### 6.2 Verify LocalStack Installation
+
 ```shell
 # Check LocalStack version
 localstack --version
@@ -386,12 +403,14 @@ curl http://localhost:4566/health
 ```
 
 ### 6.3 Verify MinIO Installation
+
 ```shell
 # Test MinIO health
 curl http://localhost:9000/minio/health/live
 ```
 
 ### 6.4 Verify Moto Installation
+
 ```shell
 # Check if moto is installed
 pip show moto
