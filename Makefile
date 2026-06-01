@@ -54,3 +54,7 @@ clean:
 update-requirements:
 	@printf "$(BLUE)🔄 Updating requirements.txt…$(RESET)\n"
 	uv export --format requirements-txt -o requirements.txt
+
+test-pre-commit:
+	@printf "$(BLUE)🧪 Running pre-commit hooks…$(RESET)\n"
+	pre-commit run --all-files --show-diff-on-failure
