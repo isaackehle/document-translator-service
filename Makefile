@@ -50,3 +50,7 @@ clean:
 	@printf "$(RED)🧹 Cleaning build artifacts and cache…$(RESET)\n"
 	rm -rf .pytest_cache .coverage htmlcov .ruff_cache .mypy_cache .hypothesis build/ dist/ *.egg-info
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+
+update-requirements:
+	@printf "$(BLUE)🔄 Updating requirements.txt…$(RESET)\n"
+	uv export --format requirements-txt -o requirements.txt

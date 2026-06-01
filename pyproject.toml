@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "document-translator-service"
 version = "0.2.0"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 description = "Translate documents using AI"
 readme = "README.md"
 dependencies = [
@@ -32,6 +32,7 @@ dev = [
     "ruff>=0.6.0",
     "pyright>=1.1.380",
     "pre-commit>=3.7.0",
+    "commitizen>=3.0.0",
 ]
 
 [tool.setuptools]
