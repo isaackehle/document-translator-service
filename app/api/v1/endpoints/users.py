@@ -29,7 +29,7 @@ async def create_user(user_in: UserCreate, db: AsyncSession = Depends(get_db)) -
         User: Created user
 
     Raises:
-        HTTPException: 400 if email already exists
+        HTTPException: 400 if user already exists
     """
     try:
         user = await user_service.create_user(db, user_in)
