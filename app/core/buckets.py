@@ -14,8 +14,5 @@ def create_buckets() -> None:
 
 
 def save_source_file_to_s3(content: bytes, filename: str, content_type: str):
-
     # Upload to S3
-    s3_client.put_object(
-        Bucket=settings.SOURCE_BUCKET, Key=filename, Body=content, ContentType=content_type
-    )
+    s3_client.put_object(Bucket=settings.SOURCE_BUCKET, Key=filename, Body=content, ContentType=content_type)

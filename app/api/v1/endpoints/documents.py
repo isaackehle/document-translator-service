@@ -46,15 +46,8 @@ def upload_document(file: UploadFile) -> Document:
         content = file.file.read()
 
         # Upload to S3
-        save_source_file_to_s3(
-            content, 
-            unique_filename, 
-            file.content_type or "application/octet-stream"
-        )
+        save_source_file_to_s3(content, unique_filename, file.content_type or "application/octet-stream")
 
         return Document(message="Success", key=unique_filename)
     except ClientError as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
-            detail=str(e)
-        )
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
