@@ -11,8 +11,8 @@ This document explains how to set up a local AWS development environment using L
 ```shell
 # Install Python and pip
 brew install pyenv
-pyenv install 3.14.4
-pyenv global 3.14.4
+pyenv install 3.12
+pyenv local 3.12
 pip install virtualenv
 
 # brew install python
