@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "document-translator-service"
 version = "0.2.0"
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 description = "Translate documents using AI"
 readme = "README.md"
 dependencies = [
@@ -43,6 +43,8 @@ name = "cz_conventional_commits"
 version_provider = "pep621"
 tag_format = "v$version"
 update_changelog_on_bump = true
+bump_pattern = "^((BREAKING[\\- ]CHANGE|\\w+)(\\(.+\\))?!?):"
+bump_map = { "^.+!$" = "MAJOR", "^BREAKING[\\- ]CHANGE" = "MAJOR", "^feat" = "MINOR", "^fix" = "PATCH", "^refactor" = "PATCH", "^perf" = "PATCH", "^chore" = "PATCH", "^docs" = "PATCH", "^test" = "PATCH", "^style" = "PATCH", "^build" = "PATCH", "^ci" = "PATCH", "^revert" = "PATCH" }
 
 [tool.ruff]
 target-version = "py311"
